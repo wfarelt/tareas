@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Task
-from . import forms
-
+from .forms import TaskForm
 
 # Create your views here.
 
@@ -15,23 +14,23 @@ def task_detail(request, pk):
 
 def task_create(request):
     if request.method == 'POST':
-        form = forms.TaskForm(request.POST)
+        form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('task:task_list')
+            return redirect('task/task_list.html')
     else:
-        form = forms.TaskForm()
+        form = TaskForm()
     return render(request, 'task/task_create.html', {'form': form})
 
 def task_edit(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == 'POST':
-        form = forms.TaskForm(request.POST, instance=task)
+        form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
             return redirect('task:task_list')
     else:
-        form = forms.TaskForm(instance=task)
+        form = TaskForm(instance=task)
     return render(request, 'task/task_edit.html', {'form': form})
 
 def task_delete(request, pk):

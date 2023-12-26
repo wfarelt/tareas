@@ -1,0 +1,26 @@
+{% extends 'task/base.html' %}
+
+{% block content %}
+    <h2>Crear Tarea</h2>
+    <form action="{% url 'task_create' %}" method="post">
+        {% csrf_token %}
+        <p>
+            <label for="title">Título</label>
+            <input type="text" name="title" id="title">
+        </p>
+        <p>
+            <label for="description">Descripción</label>
+            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+        </p>
+        <p>
+            <label for="status">Estado</label>
+            <select name="status" id="status">
+                <option value="0">Pendiente</option>
+                <option value="1">Terminada</option>
+            </select>
+        </p>
+        <p>
+            <input type="submit" value="Guardar">
+        </p>
+    </form>
+{% endblock %}

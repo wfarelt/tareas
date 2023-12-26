@@ -26,4 +26,27 @@
         <p>© 2023 MisTares by WF</p>
     </footer>
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".complete-button").click(function(){
+        var taskId = $(this).data('task-id');
+        $.ajax({
+            url: "{% url 'task_list' %}",
+            data: {
+                'task_id': taskId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            type: 'post',
+            cache: false,
+            success: function(data){
+                alert("Tarea completada");
+            }
+        });
+    });
+});
+</script>
+
 </html>
+
