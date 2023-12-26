@@ -3,6 +3,29 @@
 
 {% block content %}
     <!-- Contenido específico de esta plantilla -->
-    <h2>Contenido de esta página</h2>
-    <p>Bienvenido a esta página.</p>
+    <h2>TAREAS</h2>
+    
+    {% if tasks %}
+        <ul>
+            {% for task in tasks %}
+                
+                <div style="margin-bottom: 5px; border-style: groove; padding: 5px;">
+                    <li>{{ task.title }}</li>
+                    <p>{{ task.description }}</p>
+                    {% if task.complete %}
+                        <p style="color: green;">Tarea completada</p>
+                    {% else %}
+                        <button>Editar</button>
+                        <button>Eliminar</button>
+                        <button>Completado</button>
+                    {% endif %}
+                    
+                </div>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay tareas</p>
+    {% endif %}
+
+
 {% endblock %}
