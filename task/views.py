@@ -4,20 +4,23 @@ from .forms import TaskForm
 
 # Create your views here.
 
+def home(request):
+    return render(request, 'task/home.html')
+
 def task_list(request):
     tasks = Task.objects.all()
     return render(request, 'task/task_list.html', {'tasks': tasks})
 
 def task_detail(request, pk):
     task = get_object_or_404(Task, pk=pk)
-    return render(request, 'task/task_detail.html', {'task': task})
+    return render(request, 'task:task_detail', {'task': task})
 
 def task_create(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('task/task_list.html')
+            return redirect('task:task_list')
     else:
         form = TaskForm()
     return render(request, 'task/task_create.html', {'form': form})

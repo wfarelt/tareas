@@ -1,7 +1,7 @@
 from django import forms
-from . import models
+from .models import Task
 
 class TaskForm(forms.ModelForm):
     class Meta:
-        model = models.Task
+        model = Task
         fields = '__all__'

@@ -2,32 +2,42 @@
 {% extends 'task/base.html' %}
 
 {% block content %}
-    <!-- Contenido específico de esta plantilla -->
-    <h2>TAREAS</h2>
-    <a href="{% url 'task_create' %}">(Crear tarea)</a>
-    
-    {% if tasks %}
-        <ul>
-            {% for task in tasks %}
-                
-                <div style="margin-bottom: 5px; border-style: groove; padding: 5px;">
-                    <li>{{ task.title }}</li>
-                    <p>{{ task.description }}</p>
-                    {% if task.complete %}
-                        <p style="color: green;">Tarea completada</p>
-                    {% else %}
-                        <a href="{% url 'task_edit' task.id %}"><button>Editar</button></a>
-                        <button>Eliminar</button>
-                        <button class="complete-button" data-task-id="{{ task.id }}">Completado</button>
-                    {% endif %}
-                    
-                </div>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay tareas</p>
-    {% endif %}
-
+    <div class="container">
+        <div class="mb-3">
+            <h1>TAREAS</h1>
+            
+                <a class="btn btn-primary btn-sm"  href="{% url 'task:task_create' %}">(Nueva tarea)</a>
+        </div>
+        
+        
+        <div class="row">
+            {% if tasks %}
+                {% for task in tasks %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ task.title }}</h4>
+                                <p class="card-text">{{ task.description }}.</p>
+                                <p>{{ task.created }}</p>
+                                
+                            </div>
+                            <div class="card-footer">
+                                {% if task.complete %}
+                                    <div style="color: green;">Tarea completada</div>
+                                {% else %}
+                                    <a class="btn btn-warning btn-sm" href="{% url 'task:task_edit' task.id %}">Editar</a>
+                                    <a class="btn btn-danger btn-sm" href="{% url 'task:task_delete' task.id %}">Eliminar</a>
+                                    <a class="btn btn-success btn-sm complete-button" data-task-id="{{ task.id }}">Completado</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No hay tareas</p>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
 
