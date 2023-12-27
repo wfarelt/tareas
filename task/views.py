@@ -8,7 +8,7 @@ def home(request):
     return render(request, 'task/home.html')
 
 def task_list(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.all().order_by('complete')
     return render(request, 'task/task_list.html', {'tasks': tasks})
 
 def task_detail(request, pk):
@@ -40,3 +40,10 @@ def task_delete(request, pk):
     task = get_object_or_404(Task, pk=pk)
     task.delete()
     return redirect('task:task_list')
+
+def task_complete(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.complete = True
+    task.save()
+    return redirect('task:task_list')
+    

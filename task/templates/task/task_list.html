@@ -27,7 +27,8 @@
                                 {% else %}
                                     <a class="btn btn-warning btn-sm" href="{% url 'task:task_edit' task.id %}">Editar</a>
                                     <a class="btn btn-danger btn-sm" href="{% url 'task:task_delete' task.id %}">Eliminar</a>
-                                    <a class="btn btn-success btn-sm complete-button" data-task-id="{{ task.id }}">Completado</a>
+                                    <a class="btn btn-primary btn-sm" href="{% url 'task:task_complete' task.id %}">Completado</a>
+                                    <a class="btn btn-success btn-sm complete-button" data-task-id="{{ task.id }}">Completado Js</a>
                                 {% endif %}
                             </div>
                         </div>
