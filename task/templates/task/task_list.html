@@ -1,15 +1,15 @@
 
-{% extends 'task/base.html' %}
+{% extends 'bases/base.html' %}
 
 {% block content %}
     <div class="container">
-        <div class="mb-3">
-            <h1>TAREAS</h1>
-            
-                <a class="btn btn-primary btn-sm"  href="{% url 'task:task_create' %}">(Nueva tarea)</a>
+
+        
+        <div class="container p-3 pb-4 my-3 bg-dark text-white">
+            Tareas  
+            <a class="btn btn-primary btn-sm float-right"  href="{% url 'task:task_create' %}">Nueva tarea</a>
         </div>
-        
-        
+             
         <div class="row">
             {% if tasks %}
                 {% for task in tasks %}

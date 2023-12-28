@@ -4,9 +4,6 @@ from .forms import TaskForm
 
 # Create your views here.
 
-def home(request):
-    return render(request, 'task/home.html')
-
 def task_list(request):
     tasks = Task.objects.all().order_by('complete')
     return render(request, 'task/task_list.html', {'tasks': tasks})
