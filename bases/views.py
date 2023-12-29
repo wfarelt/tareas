@@ -6,4 +6,5 @@ from django.views.generic import TemplateView
 
 class Home(LoginRequiredMixin, TemplateView):
     template_name = 'bases/home.html'
-    login_url = '/admin/' #para que redireccione a login si no esta logueado
+    login_url = 'bases:login'
+    
