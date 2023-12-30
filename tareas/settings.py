@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-BO'
 
 TIME_ZONE = 'UTC'
 
@@ -122,6 +122,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [BASE_DIR.joinpath('static')]
+STATIC_ROOT = BASE_DIR.joinpath('staticfiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR.joinpath('media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
