@@ -8,7 +8,7 @@
     <div class="col-md-12">
         <div class="container p-3 pb-4 my-3 bg-dark text-white">
             Categorias  
-            <a class="btn btn-primary btn-sm float-right"  href="{% url 'task:task_create' %}">Nueva</a>
+            <a class="btn btn-primary btn-sm float-right"  href="{% url 'inv:categoria_new' %}">Nueva</a>
         </div>
         
         {% if not obj %}
@@ -22,7 +22,7 @@
                     <th>Estado</th>
                     <th>F. Creado</th>
                     <th>F. Modif.</th>
-                    <th>Acciones</th>
+                    <th>U. Crea</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,8 +39,8 @@
                     <td>{{ item.fc|date:"d/m/Y H:i" }}</td>
                     <td>{{ item.fm|date:"d/m/Y H:i" }}</td>
                     <td>
-                        <a href="" class="btn btn-warning btn-sm">Editar</a>
-                        <a href="" class="btn btn-danger btn-sm">Eliminar</a>
+                        <a href="{% url 'inv:categoria_edit' item.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'inv:categoria_delete' item.id %}" class="btn btn-danger btn-sm">Eliminar</a>
                     </td>
                 </tr>
                 {% endfor %}
