@@ -1,0 +1,62 @@
+{% extends "bases/base.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="container p-3 pb-4 my-3 bg-dark text-white">
+            Productos
+            <a class="btn btn-primary btn-sm float-right"  href="{% url 'inv:producto_new' %}">Nueva</a>
+        </div>
+        
+        {% if not obj %}
+        <p>No hay Productos</p>
+        {% else %}
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Codigo</th>
+                    <th>Codigo de barra</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Ultima Compra</th>
+                    <th>Subcategoria</th>
+                    <th>Marca</th>                    
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in obj %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.codigo }}</td>
+                    <td>{{ item.codigo_barra }}</td>
+                    <td>{{ item.descripcion }}</td>
+                    <td>{{ item.precio }}</td>
+                    <td>{{ item.existencia }}</td>
+                    <td>{{ item.ultima_compra|date:"d/m/Y H:i" }}</td>
+                    <td>{{ item.subcategoria }}</td>
+                    <td>{{ item.marca }}</td>
+                    <td>{% if item.estado %}
+                        <span class="label label-success">Activo</span>
+                        {% else %}
+                        <span class="label label-danger">Inactivo</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'inv:producto_edit' item.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'inv:producto_inactivar' item.id %}" class="btn btn-dark btn-sm">Inactivar</a>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
