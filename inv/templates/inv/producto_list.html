@@ -14,19 +14,23 @@
         {% if not obj %}
         <p>No hay Productos</p>
         {% else %}
-        <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped" id="tProducto">
             <thead>
                 <tr>
                     <th>Id</th>
                     <th>Codigo</th>
                     <th>Codigo de barra</th>
+
                     <th>Descripcion</th>
                     <th>Precio</th>
                     <th>Stock</th>
+
                     <th>Ultima Compra</th>
                     <th>Subcategoria</th>
                     <th>Marca</th>                    
+
                     <th>Estado</th>
+                    <th>Opciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,12 +39,15 @@
                     <td>{{ item.id }}</td>
                     <td>{{ item.codigo }}</td>
                     <td>{{ item.codigo_barra }}</td>
+
                     <td>{{ item.descripcion }}</td>
                     <td>{{ item.precio }}</td>
                     <td>{{ item.existencia }}</td>
+
                     <td>{{ item.ultima_compra|date:"d/m/Y H:i" }}</td>
                     <td>{{ item.subcategoria }}</td>
                     <td>{{ item.marca }}</td>
+
                     <td>{% if item.estado %}
                         <span class="label label-success">Activo</span>
                         {% else %}
@@ -59,4 +66,10 @@
         {% endif %}
     </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    $('#tProducto').DataTable();
+</script>
 {% endblock %}
