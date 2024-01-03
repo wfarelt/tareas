@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'easyaudit',
+    'import_export',
     'bases',
     'task',
     'inv',
