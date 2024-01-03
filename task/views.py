@@ -7,6 +7,22 @@ from .forms import TaskForm
 
 # Create your views here.
 
+
+class TaskModal(LoginRequiredMixin, CreateView):
+    model = Task
+    template_name = 'task/task_modal.html'
+    context_object_name = 'tasks'
+    form_class = TaskForm
+    success_url = reverse_lazy('task:task_list')
+    login_url = 'bases:login'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.title = form.instance.title.upper()
+        return super().form_valid(form)
+
+
+
 class TaskView(LoginRequiredMixin, ListView):
     model = Task
     template_name = 'task/task_list.html'
@@ -17,7 +33,7 @@ class TaskView(LoginRequiredMixin, ListView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    template_name = 'task/task_create.html'
+    template_name = 'task/task_modal.html'
     context_object_name = 'tasks'
     form_class = TaskForm
     success_url = reverse_lazy('task:task_list')
@@ -31,7 +47,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
 class TaskEdit(LoginRequiredMixin, UpdateView):
     model = Task
-    template_name = 'task/task_edit.html'
+    template_name = 'task/task_modal.html'
     context_object_name = 'tasks'
     form_class = TaskForm
     success_url = reverse_lazy('task:task_list')

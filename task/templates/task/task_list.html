@@ -3,11 +3,16 @@
 
 {% block content %}
     <div class="container">
-
+             <!-- Button trigger modal -->
+             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-extra="hola"
+                onclick="abrirModal('{% url 'task:task_create' %}')">
+                Nueva tarea
+            </button>
         
         <div class="container p-3 pb-4 my-3 bg-dark text-white">
             Tareas  
             <a class="btn btn-primary btn-sm float-right"  href="{% url 'task:task_create' %}">Nueva tarea</a>
+            
         </div>
              
         <div class="row">
@@ -28,7 +33,11 @@
                                     <a class="btn btn-warning btn-sm" href="{% url 'task:task_edit' task.id %}">Editar</a>
                                     <a class="btn btn-danger btn-sm" href="{% url 'task:task_delete' task.id %}">Eliminar</a>
                                     <a class="btn btn-primary btn-sm" href="{% url 'task:task_complete' task.id %}">Completado</a>
-                                    <a class="btn btn-success btn-sm complete-button" data-task-id="{{ task.id }}">Completado Js</a>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                    onclick="abrirModal('{% url 'task:task_edit' task.id %}')">
+                                    editar tarea
+                                </button>
+                                    
                                 {% endif %}
                             </div>
                         </div>
@@ -38,6 +47,11 @@
                 <p>No hay tareas</p>
             {% endif %}
         </div>
+
+   
+        
+        
+
     </div>
 
 {% endblock %}

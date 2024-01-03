@@ -1,0 +1,31 @@
+<!-- Modal -->
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        
+        <div class="modal-body">
+            {% if obj %}
+            <form action="{%url 'task:task_edit' obj.pk %}" method="post" role="form"  id="form1">
+            {% else %}
+            <form action="{%url 'task:task_create' %}" method="post" role="form" id="form1" >
+                console.log(obj);
+            {% endif %}
+            
+                {% csrf_token %}
+                {{ form.as_p }}
+
+            </form>
+        </div>
+        <div class="modal-footer">
+        
+            <button type="button" class="btn btn-primary" onclick="enviarFormulario(form1)">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cerrarModal()">Close</button>
+        
+        </div>
+    </div>
+</div>
