@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include (('bases.urls','bases'), namespace='bases')),
     path('task/', include('task.urls'), name='task'),
     path('inv/', include(('inv.urls','inv'), namespace='inv')),
+    path('cmp/', include(('cmp.urls','cmp'), namespace='cmp')),
 ]

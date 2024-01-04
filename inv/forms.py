@@ -1,6 +1,10 @@
 from django import forms
 from .models import Categoria, SubCategoria, Marca, Producto
 
+# validar que no se repita la descripcion del proveedor
+
+
+#Clase para el formulario de Categoria
 class CategoriaForm(forms.ModelForm):
     class Meta:
         model = Categoria
@@ -13,6 +17,22 @@ class CategoriaForm(forms.ModelForm):
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({'class':'form-control'})
 
+    # validar que no se repita la descripcion del Categoria
+    def clean(self):
+        try:
+            sc = Categoria.objects.get(descripcion=self.cleaned_data['descripcion'].upper())
+            if not self.instance.pk:
+                print("Registro ya existe")
+                raise forms.ValidationError('Registro ya existe')
+            elif self.instance.pk != sc.pk:
+                print("Cambio no permitido")
+                raise forms.ValidationError('Cambio no permitido')
+        except Categoria.DoesNotExist:
+            pass
+        return self.cleaned_data
+     
+
+#Clase para el formulario de SubCategoria
 class SubCategoriaForm(forms.ModelForm):
     categoria = forms.ModelChoiceField(
         queryset=Categoria.objects.filter(estado=True).order_by('descripcion')
@@ -28,7 +48,23 @@ class SubCategoriaForm(forms.ModelForm):
         # self.fields['categoria'].empty_label = 'Seleccione Categoria'
         self.fields['categoria'].widget.attrs['class'] = 'form-control select2'
         self.fields['descripcion'].widget.attrs['class'] = 'form-control'
-            
+    
+    # validar que no se repita la descripcion del SubCategoria
+    def clean(self):
+        try:
+            sc = SubCategoria.objects.get(descripcion=self.cleaned_data['descripcion'].upper())
+            if not self.instance.pk:
+                print("Registro ya existe")
+                raise forms.ValidationError('Registro ya existe')
+            elif self.instance.pk != sc.pk:
+                print("Cambio no permitido")
+                raise forms.ValidationError('Cambio no permitido')
+        except SubCategoria.DoesNotExist:
+            pass
+        return self.cleaned_data
+
+
+#Clase para el formulario de Marca            
 class MarcaForm(forms.ModelForm):
     class Meta:
         model = Marca
@@ -40,6 +76,22 @@ class MarcaForm(forms.ModelForm):
         super().__init__(*args, **kwargs) 
         self.fields['descripcion'].widget.attrs['class'] = 'form-control'
 
+    # validar que no se repita la descripcion del Marca
+    def clean(self):
+        try:
+            sc = Marca.objects.get(descripcion=self.cleaned_data['descripcion'].upper())
+            if not self.instance.pk:
+                print("Registro ya existe")
+                raise forms.ValidationError('Registro ya existe')
+            elif self.instance.pk != sc.pk:
+                print("Cambio no permitido")
+                raise forms.ValidationError('Cambio no permitido')
+        except Marca.DoesNotExist:
+            pass
+        return self.cleaned_data
+
+
+#Clase para el formulario de Producto
 class ProductoForm(forms.ModelForm):
     subcategoria = forms.ModelChoiceField(
         queryset=SubCategoria.objects.filter(estado=True).order_by('descripcion')
@@ -66,3 +118,17 @@ class ProductoForm(forms.ModelForm):
         self.fields['ultima_compra'].widget.attrs['class'] = 'form-control'
         self.fields['marca'].widget.attrs['class'] = 'form-control'
         self.fields['subcategoria'].widget.attrs['class'] = 'form-control'
+    
+    # validar que no se repita la descripcion del Producto
+    def clean(self):
+        try:
+            sc = Producto.objects.get(codigo=self.cleaned_data['codigo'].upper())
+            if not self.instance.pk:
+                print("Registro ya existe")
+                raise forms.ValidationError('Registro ya existe')
+            elif self.instance.pk != sc.pk:
+                print("Cambio no permitido")
+                raise forms.ValidationError('Cambio no permitido')
+        except Producto.DoesNotExist:
+            pass
+        return self.cleaned_data

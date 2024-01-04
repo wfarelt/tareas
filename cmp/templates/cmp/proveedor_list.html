@@ -1,0 +1,68 @@
+{% extends "bases/base.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="container p-3 pb-4 my-3 bg-dark text-white">
+            Proveedores  
+            <a class="btn btn-primary btn-sm float-right"  href="{% url 'cmp:proveedor_new' %}">Nueva</a>
+        </div>
+        
+        {% if not obj %}
+        <p>No hay Proveedores</p>
+        {% else %}
+        <table class="table table-hover table-striped" id="mProveedor">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Descripcion</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in obj %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.descripcion }}</td>
+                    <td>{{ item.direccion }}</td>
+                    <td>{{ item.telefono }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>
+                        <a href="{% url 'cmp:proveedor_edit' item.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'cmp:proveedor_delete' item.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    $('#mProveedor').DataTable(
+        {
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                "zeroRecords": "No se encontro registros",
+                "info": "Mostrando pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+        }
+    );
+</script>
+{% endblock %}

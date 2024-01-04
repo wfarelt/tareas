@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'bases',
     'task',
     'inv',
+    'cmp',
 ]
 
 MIDDLEWARE = [
