@@ -1,6 +1,7 @@
 {% extends "bases/base.html" %}
 
 {% block title %}
+<title>Productos</title>  
 {% endblock %}
 
 {% block content %}
@@ -70,6 +71,21 @@
 
 {% block js %}
 <script type="text/javascript">
-    $('#tProducto').DataTable();
+    $('#tProducto').DataTable(
+        {
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                "zeroRecords": "No se encontro registros",
+                "info": "Mostrando pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+        }
+    );
 </script>
 {% endblock %}

@@ -12,9 +12,12 @@
     <title>Task</title>
     {% endblock %}
 
-    <!-- Bootstrap core CSS -->
+    <!-- Datatables -->
     <link href="https://cdn.datatables.net/v/dt/dt-1.13.8/af-2.6.0/datatables.min.css" rel="stylesheet">
 
+    <!-- Jquery Confirm -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    
 </head>
 <body>
     <!-- Responsive navbar-->
@@ -79,6 +82,19 @@
         {% block content %}
 
         {% endblock %}
+        <br>
+        {% block messages %}
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>    
+            </div>
+            {% endif %}
+        {% endblock %}
+        
     </div>
 
 
@@ -100,9 +116,11 @@
     <!-- Ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
 
-    
- 
+    <!-- Datatables -->
     <script src="https://cdn.datatables.net/v/dt/dt-1.13.8/af-2.6.0/datatables.min.js"></script>
+
+    <!-- Jquery Confirm -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
     {% block js %}
     {% endblock %}
